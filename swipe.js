@@ -224,7 +224,8 @@ function Swipe(container, options) {
 
   function stop() {
 
-    delay = 0;
+    //delay = 0;
+    delay = options.auto > 0 ? options.auto : 0;
     clearTimeout(interval);
 
   }
@@ -472,6 +473,19 @@ function Swipe(container, options) {
       setup();
 
     },
+    start: function() {
+
+      // restore delay
+      delay = options.auto || 0;
+
+      begin();
+
+    },
+    stop: function() {
+
+      stop();
+
+    },
     slide: function(to, speed) {
 
       // cancel slideshow
@@ -494,12 +508,6 @@ function Swipe(container, options) {
       stop();
 
       next();
-
-    },
-    stop: function() {
-
-      // cancel slideshow
-      stop();
 
     },
     getPos: function() {
